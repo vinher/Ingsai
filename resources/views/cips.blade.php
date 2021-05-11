@@ -2,7 +2,9 @@
 
 @section('title', 'Almacén')
 
+
 @section('content_header')
+
 <h1>
     Almacén
     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-category" >
@@ -10,18 +12,22 @@
     </button>
 </h1>
 
+
 @stop
-@if($errors->any())
-  @foreach($errors->all() as $error)
-  <p>{{$error}}</p>
-  @endforeach
-@endif
-@error('codigo')
-<div class="alert alert-danger">
-  <p>Verifique el Código</p>
-</div>
-@enderror
 @section('content')
+
+    @if(session('mensaje'))
+      <div class="alert alert-success">
+        {{session('mensaje')}}
+      </div>
+    @endif
+
+    @error('codigo')
+    <div class="alert alert-danger">
+      <p>Verifique el Código</p>
+    </div>
+    @enderror
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -59,7 +65,14 @@
                             <td>{{$item->valorInventario }}</td>
                             <td>{{$item->folio }}</td>
                             <td>
-                              <button type="button" name="button" class="btn btn-outline-primary">Editar</button>
+
+                              <a href="" class="btn btn-outline-warning btn-sm">Editar</a>
+                              <form class="d-inline">
+                                <button class="btn btn-outline-danger btn-sm">Eliminar</button>
+                              </form>
+
+                              <a href="" class="btn btn-outline-warning btn-sm">Retiro</a>
+
                             </td>
 
                         </tr>
@@ -90,8 +103,10 @@
 </div>
 
 <!-- modal -->
+
+
 <div class="modal fade col-12" id="modal-create-category">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content bg-default">
             <div class="modal-header">
                 <h4 class="modal-title">Agregar Articulos</h4>
@@ -101,7 +116,6 @@
             <div class="modal-body">
               <form action = "{{route ('save')}}"method="POST">
                 @csrf
-
                 <div class="form-group">
                   <label for="text">Código</label>
                   <input type="text" class="form-control" name="codigo" placeholder="Introduce el Código del Producto" required>
@@ -139,19 +153,21 @@
 
                 <div class="form-group">
                   <label for="text">Cantidad En Existencia</label>
-                  <input type="text" class="form-control" name="cantidad" placeholder="Cantidad" required>
+                  <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" required>
                 </div>
                 <div class="form-group">
                   <label for="text">Precio Unitario</label>
-                  <input type="text" class="form-control" name="precioUnitario" placeholder="Precio Unitario" required>
+                  <input type="number" class="form-control" name="precioUnitario" placeholder="Precio Unitario" required>
                 </div>
+
+
                 <div class="form-group">
                   <label for="text">Valor de Inventario</label>
-                  <input type="text" class="form-control" name="valorInventario" placeholder="Valor de Inventario"required>
+                  <input type="number" class="form-control" name="valorInventario" placeholder="Valor de Inventario"required>
                 </div>
                 <div class="form-group">
                   <label for="text">Folio de Factura</label>
-                  <input type="text" class="form-control" name="folio" placeholder="Folio" required>
+                  <input type="number" class="form-control" name="folio" placeholder="Folio" required>
                 </div>
 
             </div>

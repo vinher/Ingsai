@@ -36,7 +36,7 @@ class CipController extends Controller
       $dato->folio =  $request->folio;
 
       $dato->save();
-      return back();
+      return back()->with('mensaje','Datos Guardados');
     }
     public function viewDates(){
       $save = App\Models\Cip::all();
