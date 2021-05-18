@@ -11,7 +11,7 @@ class CipController extends Controller
     public function control(){
       return view("cips");
     }
-
+    //Función para guardar datos
     public function save(Request $request){
       $request->validate([
         'codigo' => 'required | unique:cips',
@@ -38,9 +38,31 @@ class CipController extends Controller
       $dato->save();
       return back()->with('mensaje','Datos Guardados');
     }
+    //Función para visualizar datos en la tabla
     public function viewDates(){
       $save = App\Models\Cip::all();
       return view('cips',compact('save'));
+
+    }
+
+    public function editDates(Request $request, $id){
+      $var = App\Models\Cip::findOrFail($id);
+      $var->codigo=$request->codigo;
+      $var->area=$request->area;
+      $var->producto=$request->producto;
+      $var->formato=$request->formato;
+      $var->cantidad=$request->cantidad;
+      $var->precioUnitario=$request->precioUnitario;
+      $var->valorInventario=$request->valorInventario;
+      $var->folio=$request->folio;
+      if($var->save()){
+        return redirect(to: '/cips')->with('edit','Datos Actualizados');
+      }else{
+        viewDates();
+      }
+          
+    }
+    public function delete(){
 
     }
 }

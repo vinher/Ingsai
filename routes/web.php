@@ -23,4 +23,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Vista de la categoria Control Integral de Plagas: Donde vamos a guardar los datos de la misma
 Route::post('/save',[App\Http\Controllers\CipController::class,'save'])->name('save');
+//Vista de la categoria Control Integral de Plagas: Donde retornamos los valores guardados
 Route::get('/cips',[App\Http\Controllers\CipController::class,'viewDates'])->name('viewDates');
+
+Route::get('/cips/{id}',[App\Http\Controllers\CipController::class,'editDates'])->name('edit');
+
+Route::put('/edit/{id}',[App\Http\Controllers\CipController::class,'editDates'])->name('editDates');

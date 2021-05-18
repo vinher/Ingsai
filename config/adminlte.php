@@ -229,29 +229,32 @@ return [
 //            'search' => true,
 //            'topnav' => true,
   //      ],
-        /*
-        [
+        
+        /*[
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
-        ],
+        ],*/
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
+            'text'        => 'Home',
+            'url'         => '/home',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
             'label_color' => 'success',
         ],
-        */
         ['header' => 'account_settings'],
         [
-            'text' => 'Pendiente',
+            'text' => 'Usuarios',
             'url'  => '#',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'text' => 'Cotización',
+            'url'  => '#',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        [
+            'text' => 'Requisición',
+            'url'  => '#',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
@@ -262,7 +265,7 @@ return [
                     'text' => 'Control Integral de Plagas',
                     'url'  => 'cips',
                 ],
-                [
+                /*[
                     'text'    => 'level_one',
                     'url'     => '#',
                     'submenu' => [
@@ -285,11 +288,32 @@ return [
                             ],
                         ],
                     ],
-                ],
+                ],*/
                 [
-                    'text' => 'level_one',
+                    'text' => 'Desinfección',
                     'url'  => '#',
                 ],
+                [
+                    'text' => 'Purificadores',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Control de Voladores',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Herramental',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'EPP',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Limpieza',
+                    'url'  => '#',
+                ],
+
             ],
         ],
         ['header' => 'labels'],
