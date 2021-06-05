@@ -6,7 +6,7 @@
 @section('content_header')
 
 <h1>
-    Almacén
+    Control Integral De Plagas
     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-category" >
         Agregar Articulos
     </button>
@@ -155,13 +155,13 @@
     
                              
                             
-                             <form action="" method="POST" class="d-inline">
-                             @method('DELETE')
-                             @csrf
-                             <button class="btn btn-danger btn-sm" type ="submit">D</button>
+                             <form action="{{route('borrar', $item)}}" method="POST" class="d-inline">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger btn-sm" type ="submit">D</button>
                              </form>   
 
-                             <a href="" class="btn btn-success btn-sm">R</a>
+                             <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-create-retry">R</a>
     
                     
                             
@@ -272,6 +272,61 @@
       <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
+</div>
+
+<!-- /.modal -->
+
+
+
+<!--Ventana Modal Para Retirar Articulos-->
+<div class="modal fade" id="modal-create-retry">
+  <div class="modal-dialog">
+      <div class="modal-content bg-default">
+          <div class="modal-header">
+              <h4 class="modal-title">Retirar Articulos</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+              </div>
+          <div class="modal-body">
+            <form action = "{{route ('saveHistory')}}"method="POST">
+              @csrf
+              <div class="form-group">
+                <label for="text">Nombre del Responsable</label>
+                <input type="text" class="form-control" name="nombreresponsable" placeholder="Introduce El Nombre Del Responsable" required>
+              </div>
+              <div class="form-group">
+                <label for="text">Quien Entrega</label>
+                <input type="text" class="form-control" name="quienentrega" placeholder="Nombre del Encargado" required>
+              </div>
+
+
+              <div class="form-group">
+                <label for="text">Motivo</label>
+                <input type="text" class="form-control" name="motivo" placeholder="Describa el motivo" required>
+              </div>
+
+
+              <div class="form-group">
+                <label for="text">Articulo</label>
+                <input type="text" class="form-control" name="Articulo" placeholder="articulo" required>
+              </div>
+              <div class="form-group">
+                <label for="text">Cantidad</label>
+                <input type="number" class="form-control" name="cantidad" placeholder="Cantidad Del Material" required>
+              </div>
+
+
+
+          </div>
+          <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-outline-primary">Guardar</button>
+          </div>
+          </form>
+      </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 
 <!-- /.modal -->

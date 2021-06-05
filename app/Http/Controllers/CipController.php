@@ -55,14 +55,58 @@ class CipController extends Controller
       $var->precioUnitario=$request->precioUnitario;
       $var->valorInventario=$request->valorInventario;
       $var->folio=$request->folio;
-      if($var->save()){
-        return redirect(to: '/cips')->with('edit','Datos Actualizados');
+      $var->save();
+      /*if($var->save()){
+        
       }else{
         viewDates();
       }
-          
+      */         
     }
-    public function delete(){
+
+    public function borrar($id){
+      $varEliminar = App\Models\Cip::findorFail($id);
+      $varEliminar->delete();
+
+      return back()->with('mensaje','Registro Eliminado');
+    }
+
+    public function retiro($id,Request $request){
 
     }
-}
+    public function historial(){
+      return view('historial');
+    }
+
+
+
+    public function delete(){
+      return view('desinfeccion');
+    }
+    public function uno(){
+      return view('purificadores');
+    }    
+    public function dos(){
+      return view('controlvoladores');
+    }    
+    public function tres(){
+      return view('herramental');
+    }    
+    public function cuatro(){
+      return view('epp');
+    }    
+    public function cinco(){
+      return view('limpieza');
+    }    
+
+    public function siete(){
+      return view('cotizacion');
+    }    
+    public function ocho(){
+      return view('requisicion');
+    }    
+
+
+
+
+  }

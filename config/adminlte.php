@@ -249,12 +249,12 @@ return [
         ],
         [
             'text' => 'Cotización',
-            'url'  => '#',
+            'url'  => 'cotizacion',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
             'text' => 'Requisición',
-            'url'  => '#',
+            'url'  => 'requisicion',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
@@ -291,32 +291,32 @@ return [
                 ],*/
                 [
                     'text' => 'Desinfección',
-                    'url'  => '#',
+                    'url'  => 'desinfeccion',
                 ],
                 [
                     'text' => 'Purificadores',
-                    'url'  => '#',
+                    'url'  => 'purificadores',
                 ],
                 [
                     'text' => 'Control de Voladores',
-                    'url'  => '#',
+                    'url'  => 'controlvoladores',
                 ],
                 [
                     'text' => 'Herramental',
-                    'url'  => '#',
+                    'url'  => 'herramental',
                 ],
                 [
                     'text' => 'EPP',
-                    'url'  => '#',
+                    'url'  => 'epp',
                 ],
                 [
                     'text' => 'Limpieza',
-                    'url'  => '#',
+                    'url'  => 'limpieza',
                 ],
 
             ],
         ],
-        ['header' => 'labels'],
+        /*['header' => 'labels'],
         [
             'text'       => 'important',
             'icon_color' => 'red',
@@ -331,7 +331,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ],*/
     ],
 
     /*
