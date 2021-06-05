@@ -47,14 +47,17 @@ Historial
                       </tr>
                   </thead>
                   <tbody>
-
-                      <tr>
+                    @foreach ($var as $datos)
                           
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                      <tr>
+                              
+
+                          <td>{{$datos->nombreresponsable}}</td>
+                          <td>{{$datos->quienentrega}}</td>
+                          <td>{{$datos->motivo}}</td>
                           <td>
-                          <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-category">Detalles</a>
+                          <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-category">Editar</a>
+                        </td>
                           <!--PENDIENTE URGENTE VENTENA EDITAR-->
                           <!--Ventana Modal Para Editar Articulos-->
                           <div class="modal fade" id="modal-edit-category">
@@ -117,7 +120,7 @@ Historial
                                           <div class="form-group">
                                             <label for="text">Valor de Inventario</label>
                                             <input type="number" class="form-control" name="valorInventario" placeholder="Valor de Inventario"required
-                                            value=""
+                                            value="{{}}"
                                             >
                                           
                                           </div>
@@ -138,15 +141,10 @@ Historial
                               <!-- /.modal-dialog -->
                           </div>
 
-                          <!-- /.modal -->
-  
-                           
-  
-                  
-                          
-                          </td>
-                      </tr>
-                  </tbody>
+                        </tr>
+
+                        @endforeach
+                      </tbody>
 
                   <tfoot>
                       <tr>
@@ -172,74 +170,3 @@ Historial
 
 
 
-<!--Ventana Modal Para Guardar Articulos-->
-<div class="modal fade" id="modal-create-category">
-    <div class="modal-dialog">
-        <div class="modal-content bg-default">
-            <div class="modal-header">
-                <h4 class="modal-title">Agregar Articulos</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                </div>
-            <div class="modal-body">
-              <form action = "{{route ('save')}}"method="POST">
-                @csrf
-                <div class="form-group">
-                  <label for="text">Código</label>
-                  <input type="text" class="form-control" name="codigo" placeholder="Introduce el Código del Producto" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="text">Producto</label>
-                  <input type="text" class="form-control" name="producto" placeholder="Nombre del Producto" required>
-                </div>
-                <div class="form-group">
-                  <label for="text">Formato</label>
-                  <select class="form-control" name="formato" value="">
-                    <option selected value="" required>Opciones</option>
-                    <option value="Piezas">Piezas</option>
-                    <option value="Litros">Litros</option>
-                    <option value="Equipo">Equipo</option>
-                    <option value="Gramos">Gramos</option>
-                    <option value="Kilogramos">Kilogramos</option>
-
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="text">Fecha de Caducidad</label>
-                  <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" required>
-                </div>
-                <div class="form-group">
-                  <label for="text">Cantidad En Existencia</label>
-                  <input type="number" class="form-control" name="precioUnitario" placeholder="Precio Unitario" required>
-                </div>
-                <div class="form-group">
-                    <label for="text">Precio Unitario</label>
-                    <input type="number" class="form-control" name="valorInventario" placeholder="Valor de Inventario"required>
-                  </div>
-
-
-
-                <div class="form-group">
-                  <label for="text">Valor de Inventario</label>
-                  <input type="number" class="form-control" name="valorInventario" placeholder="Valor de Inventario"required>
-                </div>
-                <div class="form-group">
-                  <label for="text">Folio de Factura</label>
-                  <input type="number" class="form-control" name="folio" placeholder="Folio" required>
-                </div>
-
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-outline-primary">Guardar</button>
-            </div>
-            </form>
-        </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
-<!-- /.modal -->

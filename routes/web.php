@@ -25,8 +25,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/save',[App\Http\Controllers\CipController::class,'save'])->name('save');
 //Vista de la categoria Control Integral de Plagas: Donde retornamos los valores guardados
 Route::get('/cips',[App\Http\Controllers\CipController::class,'viewDates'])->name('viewDates');
-//Vista de la categoria Control Integral de Plagas: Donde vamos a guardar los datos de la misma
-Route::post('/saveHistory',[App\Http\Controllers\CipController::class,'saveHistory'])->name('saveHistory');
+
+
+
+Route::post('/saveHistory',[App\Http\Controllers\HistoryController::class,'saveHistory'])->name('saveHistory');
 
 
 Route::get('/cips/{id}',[App\Http\Controllers\CipController::class,'editDates'])->name('edit');
@@ -37,7 +39,11 @@ Route::delete('/eliminar/{id}',[App\Http\Controllers\CipController::class,'borra
 
 Route::get('/retiro/{id}',[App\Http\Controllers\CipController::class,'retiro'])->name('retiro');
 
-Route::get('/historial',[App\Http\Controllers\CipController::class,'historial'])->name('historial');
+
+
+Route::get('/historial',[App\Http\Controllers\HistoryController::class,'historial'])->name('historial');
+
+Route::get('/historial',[App\Http\Controllers\HistoryController::class,'viewDatos'])->name('viewDatos');
 
 
 Route::get('/desinfeccion',[App\Http\Controllers\CipController::class,'delete'])->name('desinfeccion');

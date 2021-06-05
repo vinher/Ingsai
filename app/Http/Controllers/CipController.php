@@ -56,6 +56,8 @@ class CipController extends Controller
       $var->valorInventario=$request->valorInventario;
       $var->folio=$request->folio;
       $var->save();
+
+      return back()->with('mensaje','Datos Editados');
       /*if($var->save()){
         
       }else{
@@ -74,9 +76,7 @@ class CipController extends Controller
     public function retiro($id,Request $request){
 
     }
-    public function historial(){
-      return view('historial');
-    }
+
 
 
 

@@ -308,7 +308,7 @@
 
               <div class="form-group">
                 <label for="text">Articulo</label>
-                <input type="text" class="form-control" name="Articulo" placeholder="articulo" required>
+                <input type="text" class="form-control" name="articulo" placeholder="Articulo" required>
               </div>
               <div class="form-group">
                 <label for="text">Cantidad</label>
