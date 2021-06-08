@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cip;
 use App;
 class HistoryController extends Controller
 {
     //
-    public function saveHistory(Request $request){
+    public function saveHistory($id,Request $request){
         $request->validate([
           'nombreresponsable' => 'required',
           'quienentrega' => 'required',
@@ -23,9 +24,12 @@ class HistoryController extends Controller
         $dato->motivo = $request->motivo;
         $dato->articulo= $request->articulo;
         $dato->cantidad = $request->cantidad;
-
-  
         $dato->save();
+        
+        $var = App\Models\Cip::findOrFail($id);
+        $var->cantidad = $var->cantidad - $dato -> cantidad;
+        $var->save();
+        
         return back()->with('mensaje','Datos Guardados');
       }
 
@@ -33,5 +37,6 @@ class HistoryController extends Controller
         $var = App\Models\History::all();
         return view('historys',compact('var'));
     }  
+
 
 }

@@ -80,6 +80,7 @@ class CipController extends Controller
 
 
 
+
     public function delete(){
       return view('desinfeccion');
     }

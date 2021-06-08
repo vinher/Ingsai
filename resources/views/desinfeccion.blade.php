@@ -1,33 +1,22 @@
 @extends('adminlte::page')
-
-
-@section('title','desinfeccion')
-    
-<!--Botón Ventana Modal-->
+@section('title','Desinfección')
 @section('content_header')
   <h1>
     Desinfección
-     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-category" >
-        Agregar Articulos
-     </button>
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-save-category" >
+      Agregar Articulos
+    </button>  
   </h1>
 
-  @stop
-  @section('content')
+@stop
+@section('content')
 
-
-
-  @if(session('mensaje'))
-    <div class="alert alert-success">
-      {{session('mensaje')}}
-    </div>
-  @endif
-
-  @error('codigo')
-  <div class="alert alert-danger">
-    <p>Verifique el Código</p>
+@if(session('mensaje'))
+  <div class="alert alert-success">
+    {{session('mensaje')}}
   </div>
-  @enderror
+@endif
+
 
 <div class="container-fluid">
   <div class="row">
@@ -42,35 +31,35 @@
               <table id="categories" class="table table-bordered table-striped">
                   <thead>
                       <tr>
+                        <th>Código</th>
+                        <th>Producto</th>
+                        <th>Formato</th>
+                        <th>Fecha de Caducidad</th>
+                        <th>Cantidad En Existencia</th>
+                        <th>Precio Unitario</th>
+                        <th>Valor Inventario</th>
+                        <th>Folio Factura</th>
+                        <th>Acciones</th>
 
-                          <th>Código</th>
-                          <th>Área</th>
-                          <th>Producto</th>
-                          <th>Formato</th>
-                          <th>Cantidad En Existencia</th>
-                          <th>Precio Unitario</th>
-                          <th>Valor De Inventario</th>
-                          <th>Folio</th>
-                          <th>Acciones</th>
                       </tr>
                   </thead>
+                  @foreach ($save as $item)
                   <tbody>
-
                       <tr>
                           
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>{{$item->codigo}}</td>
+                          <td>{{$item->producto}}</td>
+                          <td>{{$item->formato}}</td>
+                          <td>{{$item->fecha}}</td>
+                          <td>{{$item->cantidadExistencia}}</td>
+                          <td>{{$item->precioUnitario}}</td>
+                          <td>{{$item->valorInventario}}</td>
+                          <td>{{$item->folio}}</td>
                           <td>
-                          <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-category">E</a>
+                          <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-category{{$item->id}}">E</a>
                           <!--PENDIENTE URGENTE VENTENA EDITAR-->
                           <!--Ventana Modal Para Editar Articulos-->
-                          <div class="modal fade" id="modal-edit-category">
+                          <div class="modal fade" id="modal-edit-category{{$item->id}}">
                               <div class="modal-dialog">
                                   <div class="modal-content bg-default">
                                       <div class="modal-header">
@@ -79,35 +68,21 @@
                                               <span aria-hidden="true">&times;</span></button>
                                           </div>
                                       <div class="modal-body">
-                                    <form action = ""method="POST">
+                                    <form action = ""method="">
                                       @method('PUT')
                                       @csrf
                                       <div class="form-group">
                                         <label for="text">Código</label>
-                                        <input type="text" class="form-control" name="codigo" value="">
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="text">Área</label>
-                                        <select class="form-control" name="area" value="">
-                                          <option selected value="" required>Opciones</option>
-                                          <option value="Estacion de Roedores">Estacion de Roedores</option>
-                                          <option value="Trampas Capturas de Roedores">Trampas Capturas de Roedores</option>
-                                          <option value="Llave para Estación">Llave para Estación</option>
-                                          <option value="Aritamento Para Veneno">Aritamento Para Veneno</option>
-                                          <option value="Trampas Monitoreo de Insectos">Trampas Monitoreo de Insectos</option>
-                                          <option value="Trampas Para Especies Menores">Trampas Para Especies Menores</option>
-                                          <option value="Estacion Control de Plagas">Estacion Control de Plagas</option>
-
-                                        </select>
+                                        <input type="text" class="form-control" name="codigo" value="{{$item->codigo}}">
                                       </div>
                                       <div class="form-group">
                                         <label for="text">Producto</label>
-                                        <input type="text" class="form-control" name="producto" placeholder="Nombre del Producto" required value="">
+                                        <input type="text" class="form-control" name="producto" placeholder="Nombre del Producto" required value="{{$item->producto}}">
                                       </div>
                                       <div class="form-group">
                                         <label for="text">Formato</label>
-                                        <select class="form-control" name="formato" value="">
-                                          <option selected value="" required>Opciones</option>
+                                        <select class="form-control" name="formato" value="{{$item->formato}}">
+                                          <option selected value="{{$item->formato}}" required>{{$item->formato}}</option>
                                           <option value="Piezas">Piezas</option>
                                           <option value="Litros">Litros</option>
                                           <option value="Equipo">Equipo</option>
@@ -119,24 +94,24 @@
 
                                           <div class="form-group">
                                             <label for="text">Cantidad En Existencia</label>
-                                            <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" value="" required>
+                                            <input type="number" class="form-control" name="cantidadExistencia" placeholder="Cantidad" value="{{$item->cantidadExistencia}}" required>
                                           </div>
                                           <div class="form-group">
                                             <label for="text">Precio Unitario</label>
-                                            <input type="number" class="form-control" name="precioUnitario" placeholder="Precio Unitario" required value="">
+                                            <input type="number" class="form-control" name="precioUnitario" placeholder="Precio Unitario" required value="{{$item->precioUnitario}}">
                                           </div>
 
 
                                           <div class="form-group">
                                             <label for="text">Valor de Inventario</label>
                                             <input type="number" class="form-control" name="valorInventario" placeholder="Valor de Inventario"required
-                                            value=""
+                                            value="{{$item->valorInventario}}"
                                             >
                                           
                                           </div>
                                           <div class="form-group">
                                             <label for="text">Folio de Factura</label>
-                                            <input type="number" class="form-control" name="folio" placeholder="Folio" required value="">
+                                            <input type="number" class="form-control" name="folio" placeholder="Folio" required value="{{$item->folio}}">
                                           </div>
 
                                       </div>
@@ -156,115 +131,144 @@
                            
                           
                            <form action="" method="POST" class="d-inline">
-                           @method('DELETE')
-                           @csrf
-                           <button class="btn btn-danger btn-sm" type ="submit">D</button>
+                              @method('DELETE')
+                              @csrf
+                              <button class="btn btn-danger btn-sm" type ="submit">D</button>
                            </form>   
 
-                           <a href="" class="btn btn-success btn-sm">R</a>
-  
-                  
-                          
-                          </td>
-                      </tr>
+                           <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-create-retry">R</a>
                   </tbody>
+                  @endforeach
+<!--Ventana Modal Para Retirar Articulos-->
+<div class="modal fade" id="modal-create-retry">
+  <div class="modal-dialog">
+      <div class="modal-content bg-default">
+          <div class="modal-header">
+              <h4 class="modal-title">Retirar Articulos</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+              </div>
+          <div class="modal-body">
+            <form action = ""method="POST">
+              @csrf
+              <div class="form-group">
+                <label for="text">Nombre del Responsable</label>
+                <input type="text" class="form-control" name="nombreresponsable" placeholder="Introduce El Nombre Del Responsable" required>
+              </div>
+              <div class="form-group">
+                <label for="text">Quien Entrega</label>
+                <input type="text" class="form-control" name="quienentrega" placeholder="Nombre del Encargado" required>
+              </div>
 
-                  <tfoot>
-                      <tr>
-                        <th>Código</th>
-                        <th>Área</th>
-                        <th>Producto</th>
-                        <th>Formato</th>
-                        <th>Cantidad En Existencia</th>
-                        <th>Precio Unitario</th>
-                        <th>Valor De Inventario</th>
-                        <th>Folio de Factura</th>
-                        <th>Acciones</th>
-                      </tr>
-                  </tfoot>
-              </table>
+
+              <div class="form-group">
+                <label for="text">Motivo</label>
+                <input type="text" class="form-control" name="motivo" placeholder="Describa el motivo" required>
+              </div>
+
+
+              <div class="form-group">
+                <label for="text">Articulo</label>
+                <input type="text" class="form-control" name="articulo" placeholder="Articulo" required >
+              </div>
+              <div class="form-group">
+                <label for="text">Cantidad</label>
+                <input type="number" class="form-control" name="cantidad" placeholder="Cantidad Del Material" required>
+              </div>
+
+
+
           </div>
-          <!-- /.card-body -->
+          <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-outline-primary">Guardar</button>
           </div>
-          <!-- /.card -->
+          </form>
       </div>
-      <!-- /.col -->
-  </div>
-  <!-- /.row -->
-</div>
-  @stop
 
-
-
-
-<!--Ventana Modal Para Guardar Articulos-->
-<div class="modal fade" id="modal-create-category">
-    <div class="modal-dialog">
-        <div class="modal-content bg-default">
-            <div class="modal-header">
-                <h4 class="modal-title">Agregar Articulos</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                </div>
-            <div class="modal-body">
-              <form action = "{{route ('save')}}"method="POST">
-                @csrf
-                <div class="form-group">
-                  <label for="text">Código</label>
-                  <input type="text" class="form-control" name="codigo" placeholder="Introduce el Código del Producto" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="text">Producto</label>
-                  <input type="text" class="form-control" name="producto" placeholder="Nombre del Producto" required>
-                </div>
-                <div class="form-group">
-                  <label for="text">Formato</label>
-                  <select class="form-control" name="formato" value="">
-                    <option selected value="" required>Opciones</option>
-                    <option value="Piezas">Piezas</option>
-                    <option value="Litros">Litros</option>
-                    <option value="Equipo">Equipo</option>
-                    <option value="Gramos">Gramos</option>
-                    <option value="Kilogramos">Kilogramos</option>
-
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="text">Fecha de Caducidad</label>
-                  <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" required>
-                </div>
-                <div class="form-group">
-                  <label for="text">Cantidad En Existencia</label>
-                  <input type="number" class="form-control" name="precioUnitario" placeholder="Precio Unitario" required>
-                </div>
-                <div class="form-group">
-                    <label for="text">Precio Unitario</label>
-                    <input type="number" class="form-control" name="valorInventario" placeholder="Valor de Inventario"required>
-                  </div>
-
-
-
-                <div class="form-group">
-                  <label for="text">Valor de Inventario</label>
-                  <input type="number" class="form-control" name="valorInventario" placeholder="Valor de Inventario"required>
-                </div>
-                <div class="form-group">
-                  <label for="text">Folio de Factura</label>
-                  <input type="number" class="form-control" name="folio" placeholder="Folio" required>
-                </div>
-
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-outline-primary">Guardar</button>
-            </div>
-            </form>
-        </div>
       <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 
 <!-- /.modal -->
+<!--Ventana Modal Para Guardar Articulos-->
+<div class="modal fade" id="modal-save-category">
+  <div class="modal-dialog">
+      <div class="modal-content bg-default">
+          <div class="modal-header">
+              <h4 class="modal-title">Agregar Articulos</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+              </div>
+          <div class="modal-body">
+            <form action = "{{route ('guardarDesinfeccion')}}" method="POST">
+              @csrf
+              <div class="form-group">
+                <label for="text">Código</label>
+                <input type="text" class="form-control" name="codigo" placeholder="Introduce el Código del Producto" required>
+              </div>
+
+              <div class="form-group">
+                <label for="text">Producto</label>
+                <input type="text" class="form-control" name="producto" placeholder="Nombre del Producto" required>
+              </div>
+              <div class="form-group">
+                <label for="text">Formato</label>
+                <select class="form-control" name="formato" value="">
+                  <option selected value="" required>Opciones</option>
+                  <option value="Piezas">Piezas</option>
+                  <option value="Litros">Litros</option>
+                  <option value="Equipo">Equipo</option>
+                  <option value="Gramos">Gramos</option>
+                  <option value="Kilogramos">Kilogramos</option>
+
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="text">Fecha De Caducidad</label>
+                <input type="number" class="form-control" name="fecha" placeholder="Cantidad" required>
+              </div>
+              <div class="form-group">
+                <label for="text">Cantidad</label>
+                <input type="number" class="form-control" name="cantidadExistencia" placeholder="Cantidad" required>
+              </div>
+              <div class="form-group">
+                <label for="text">Precio Unitario</label>
+                <input type="number" class="form-control" name="precioUnitario" placeholder="Precio Unitario" required>
+              </div>
+
+
+              <div class="form-group">
+                <label for="text">Valor de Inventario</label>
+                <input type="number" class="form-control" name="valorInventario" placeholder="Valor de Inventario"required>
+              </div>
+              <div class="form-group">
+                <label for="text">Folio de Factura</label>
+                <input type="number" class="form-control" name="folio" placeholder="Folio" required>
+              </div>
+
+          </div>
+          <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-outline-primary">Guardar</button>
+          </div>
+          </form>
+      </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>        
+@endsection
+
+@section('js')
+<script>
+$(document).ready(function() {
+    $('#categories').DataTable( {
+        "order": [[ 3, "desc" ]]
+    } );
+} );
+</script>
+@stop
+
+<!-- modal -->

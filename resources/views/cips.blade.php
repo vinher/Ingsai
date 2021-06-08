@@ -107,7 +107,7 @@
                                         <div class="form-group">
                                           <label for="text">Formato</label>
                                           <select class="form-control" name="formato" value="{{$item->formato}}">
-                                            <option selected value="{{$item->formato}}" required>Opciones</option>
+                                            <option selected value="" required>{{$item->formato}}</option>
                                             <option value="Piezas">Piezas</option>
                                             <option value="Litros">Litros</option>
                                             <option value="Equipo">Equipo</option>
@@ -161,7 +161,60 @@
                                 <button class="btn btn-danger btn-sm" type ="submit">D</button>
                              </form>   
 
-                             <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-create-retry">R</a>
+                             <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-create-retry{{$item->id}}">R</a>
+
+<!--Ventana Modal Para Retirar Articulos-->
+<div class="modal fade" id="modal-create-retry{{$item->id}}">
+  <div class="modal-dialog">
+      <div class="modal-content bg-default">
+          <div class="modal-header">
+              <h4 class="modal-title">Retirar Articulos</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+              </div>
+          <div class="modal-body">
+            <form action = "{{route ('saveHistory',$item->id)}}"method="POST">
+              @csrf
+              <div class="form-group">
+                <label for="text">Nombre del Responsable</label>
+                <input type="text" class="form-control" name="nombreresponsable" placeholder="Introduce El Nombre Del Responsable" required>
+              </div>
+              <div class="form-group">
+                <label for="text">Quien Entrega</label>
+                <input type="text" class="form-control" name="quienentrega" placeholder="Nombre del Encargado" required>
+              </div>
+
+
+              <div class="form-group">
+                <label for="text">Motivo</label>
+                <input type="text" class="form-control" name="motivo" placeholder="Describa el motivo" required>
+              </div>
+
+
+              <div class="form-group">
+                <label for="text">Articulo</label>
+                <input type="text" class="form-control" name="articulo" placeholder="Articulo" required value="{{$item->producto}}">
+              </div>
+              <div class="form-group">
+                <label for="text">Cantidad</label>
+                <input type="number" class="form-control" name="cantidad" placeholder="Cantidad Del Material" required>
+              </div>
+
+
+
+          </div>
+          <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-outline-primary">Guardar</button>
+          </div>
+          </form>
+      </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- /.modal -->
     
                     
                             
@@ -277,59 +330,6 @@
 <!-- /.modal -->
 
 
-
-<!--Ventana Modal Para Retirar Articulos-->
-<div class="modal fade" id="modal-create-retry">
-  <div class="modal-dialog">
-      <div class="modal-content bg-default">
-          <div class="modal-header">
-              <h4 class="modal-title">Retirar Articulos</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-              </div>
-          <div class="modal-body">
-            <form action = "{{route ('saveHistory')}}"method="POST">
-              @csrf
-              <div class="form-group">
-                <label for="text">Nombre del Responsable</label>
-                <input type="text" class="form-control" name="nombreresponsable" placeholder="Introduce El Nombre Del Responsable" required>
-              </div>
-              <div class="form-group">
-                <label for="text">Quien Entrega</label>
-                <input type="text" class="form-control" name="quienentrega" placeholder="Nombre del Encargado" required>
-              </div>
-
-
-              <div class="form-group">
-                <label for="text">Motivo</label>
-                <input type="text" class="form-control" name="motivo" placeholder="Describa el motivo" required>
-              </div>
-
-
-              <div class="form-group">
-                <label for="text">Articulo</label>
-                <input type="text" class="form-control" name="articulo" placeholder="Articulo" required>
-              </div>
-              <div class="form-group">
-                <label for="text">Cantidad</label>
-                <input type="number" class="form-control" name="cantidad" placeholder="Cantidad Del Material" required>
-              </div>
-
-
-
-          </div>
-          <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-outline-primary">Guardar</button>
-          </div>
-          </form>
-      </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-<!-- /.modal -->
 
 
 

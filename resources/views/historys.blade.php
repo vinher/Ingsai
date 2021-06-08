@@ -1,30 +1,15 @@
 @extends('adminlte::page')
 
-
 @section('title','Historial')
-    
-<!--Botón Ventana Modal-->
+
 @section('content_header')
   <h1>
-Historial    
+      Historial    
   </h1>
 
-  @stop
-  @section('content')
+@stop
 
-
-
-  @if(session('mensaje'))
-    <div class="alert alert-success">
-      {{session('mensaje')}}
-    </div>
-  @endif
-
-  @error('codigo')
-  <div class="alert alert-danger">
-    <p>Verifique el Código</p>
-  </div>
-  @enderror
+@section('content')
 
 <div class="container-fluid">
   <div class="row">
@@ -50,123 +35,100 @@ Historial
                     @foreach ($var as $datos)
                           
                       <tr>
-                              
-
                           <td>{{$datos->nombreresponsable}}</td>
                           <td>{{$datos->quienentrega}}</td>
                           <td>{{$datos->motivo}}</td>
                           <td>
-                          <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-category">Editar</a>
+                          <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-category{{$datos->id}}">Ver Detalles</a>
+                                                    <!--Ventana Modal Para Ver Los Detalles De El Retiro-->
+                                                    <div class="modal fade" id="modal-edit-category{{$datos->id}}">
+                                                      <div class="modal-dialog">
+                                                          <div class="modal-content bg-default">
+                                                              <div class="modal-header">
+                                                                  <h4 class="modal-title">Detalles</h4>
+                                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                      <span aria-hidden="true">&times;</span></button>
+                                                                  </div>
+                                                              <div class="modal-body">
+                                                            <form action = ""method="">
+                                                              @csrf
+                                                              <div class="form-group">
+                                                                <label for="text">Nombre del Responsable</label>
+                                                                <p class="fw-normal">{{$datos->nombreresponsable}}</p>
+                                                                
+                                                              </div>
+                        
+                                                              <div class="form-group">
+                                                                <label for="text">Quien Entrego</label>
+                                                                <p class="fw-normal">{{$datos->quienentrega}}</p>
+                                                                
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label for="text">Motivo</label>
+                                                                <p class="fw-normal">{{$datos->motivo}}</p>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label for="text">Articulos</label>
+                                                                <p class="fw-normal">{{$datos->articulo}}</p>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label for="text">Cantidad</label>
+                                                                <p class="fw-normal">{{$datos->cantidad}}</p>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label for="text">Fecha:</label>
+                                                                <p class="fw-normal">{{$datos->created_at}}</p>
+                                                              </div>
+                        
+                        
+                                                              <div class="modal-footer justify-content-between">
+                                                                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
+                                                                  <button type="submit" class="btn btn-outline-primary">Descargar</button>
+                                                              </div>
+                                                              </form>
+                                                          </div>
+                                                        <!-- /.modal-content -->
+                                                      </div>
+                                                      <!-- /.modal-dialog -->
+                                                  </div>
+                        
                         </td>
-                          <!--PENDIENTE URGENTE VENTENA EDITAR-->
-                          <!--Ventana Modal Para Editar Articulos-->
-                          <div class="modal fade" id="modal-edit-category">
-                              <div class="modal-dialog">
-                                  <div class="modal-content bg-default">
-                                      <div class="modal-header">
-                                          <h4 class="modal-title">Editar Articulos</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span></button>
-                                          </div>
-                                      <div class="modal-body">
-                                    <form action = ""method="POST">
-                                      @method('PUT')
-                                      @csrf
-                                      <div class="form-group">
-                                        <label for="text">Código</label>
-                                        <input type="text" class="form-control" name="codigo" value="">
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="text">Área</label>
-                                        <select class="form-control" name="area" value="">
-                                          <option selected value="" required>Opciones</option>
-                                          <option value="Estacion de Roedores">Estacion de Roedores</option>
-                                          <option value="Trampas Capturas de Roedores">Trampas Capturas de Roedores</option>
-                                          <option value="Llave para Estación">Llave para Estación</option>
-                                          <option value="Aritamento Para Veneno">Aritamento Para Veneno</option>
-                                          <option value="Trampas Monitoreo de Insectos">Trampas Monitoreo de Insectos</option>
-                                          <option value="Trampas Para Especies Menores">Trampas Para Especies Menores</option>
-                                          <option value="Estacion Control de Plagas">Estacion Control de Plagas</option>
-
-                                        </select>
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="text">Producto</label>
-                                        <input type="text" class="form-control" name="producto" placeholder="Nombre del Producto" required value="">
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="text">Formato</label>
-                                        <select class="form-control" name="formato" value="">
-                                          <option selected value="" required>Opciones</option>
-                                          <option value="Piezas">Piezas</option>
-                                          <option value="Litros">Litros</option>
-                                          <option value="Equipo">Equipo</option>
-                                          <option value="Gramos">Gramos</option>
-                                          <option value="Kilogramos">Kilogramos</option>
-
-                                            </select>
-                                          </div>
-
-                                          <div class="form-group">
-                                            <label for="text">Cantidad En Existencia</label>
-                                            <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" value="" required>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="text">Precio Unitario</label>
-                                            <input type="number" class="form-control" name="precioUnitario" placeholder="Precio Unitario" required value="">
-                                          </div>
-
-
-                                          <div class="form-group">
-                                            <label for="text">Valor de Inventario</label>
-                                            <input type="number" class="form-control" name="valorInventario" placeholder="Valor de Inventario"required
-                                            value="{{}}"
-                                            >
-                                          
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="text">Folio de Factura</label>
-                                            <input type="number" class="form-control" name="folio" placeholder="Folio" required value="">
-                                          </div>
-
-                                      </div>
-                                      <div class="modal-footer justify-content-between">
-                                          <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
-                                          <button type="submit" class="btn btn-outline-primary">Guardar</button>
-                                      </div>
-                                      </form>
-                                  </div>
-                                <!-- /.modal-content -->
-                              </div>
-                              <!-- /.modal-dialog -->
-                          </div>
-
                         </tr>
-
                         @endforeach
                       </tbody>
-
                   <tfoot>
                       <tr>
                         <th>Responsable</th>
                         <th>Quien Entrego</th>
                         <th>Motivo</th>
                         <th>Acciones</th>
-
-                      </tr>
-                  </tfoot>
+                      </tr>                  
+                    </tfoot>
               </table>
+              
           </div>
           <!-- /.card-body -->
           </div>
           <!-- /.card -->
-      </div>
+          
+        </div>
       <!-- /.col -->
   </div>
+  <button class="btn btn-success btn-sm">Exportar a PDF</button>
+          <div class="container"></div>
   <!-- /.row -->
 </div>
-  @stop
+@stop
 
+@section('js')
+<script>
+$(document).ready(function() {
+    $('#categories').DataTable( {
+        "order": [[ 3, "desc" ]]
+    } );
+} );
+</script>
+@stop
 
 
 
