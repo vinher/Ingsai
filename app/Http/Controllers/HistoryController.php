@@ -37,6 +37,7 @@ class HistoryController extends Controller
         $var = App\Models\History::all();
         return view('historys',compact('var'));
     }  
+    
 
 
 }

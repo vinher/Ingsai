@@ -68,7 +68,7 @@
                                               <span aria-hidden="true">&times;</span></button>
                                           </div>
                                       <div class="modal-body">
-                                    <form action = ""method="">
+                                    <form action = "{{route('editDesc',$item->id)}}"method="POST">
                                       @method('PUT')
                                       @csrf
                                       <div class="form-group">
@@ -91,7 +91,10 @@
 
                                             </select>
                                           </div>
-
+                                          <div class="form-group">
+                                            <label for="text">fecha</label>
+                                            <input type="number" class="form-control" name="fecha" placeholder="Cantidad" value="{{$item->cantidadExistencia}}" required>
+                                          </div>
                                           <div class="form-group">
                                             <label for="text">Cantidad En Existencia</label>
                                             <input type="number" class="form-control" name="cantidadExistencia" placeholder="Cantidad" value="{{$item->cantidadExistencia}}" required>

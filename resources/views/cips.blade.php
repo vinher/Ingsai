@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Almacén')
+@section('title', 'Control Integral de Plagas')
 
 
 @section('content_header')
@@ -107,7 +107,7 @@
                                         <div class="form-group">
                                           <label for="text">Formato</label>
                                           <select class="form-control" name="formato" value="{{$item->formato}}">
-                                            <option selected value="" required>{{$item->formato}}</option>
+                                            <option selected value="{{$item->formato}}" required>{{$item->formato}}</option>
                                             <option value="Piezas">Piezas</option>
                                             <option value="Litros">Litros</option>
                                             <option value="Equipo">Equipo</option>

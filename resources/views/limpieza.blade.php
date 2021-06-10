@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title','Desinfección')
+@section('title','Limpieza')
 @section('content_header')
 <h1>
 Limpieza
@@ -9,7 +9,11 @@ Limpieza
 </h1>
 @stop
 @section('content')
-
+@if(session('mensaje'))
+<div class="alert alert-success">
+  {{session('mensaje')}}
+</div>
+@endif
 <div class="container-fluid">
   <div class="row">
       <div class="col-12">
@@ -31,13 +35,16 @@ Limpieza
                           <th>Precio Unitario</th>
                           <th>Valor Inventario</th>
                           <th>Folio Factura</th>
+                          <th>Acciones</th>
                       </tr>
                   </thead>
+
                   <tbody>
+
+                         
 
                       <tr>
                           
-                          <td></td>
                           <td></td>
                           <td></td>
                           <td></td>
@@ -141,7 +148,8 @@ Limpieza
                            </form>   
 
                            <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-create-retry">R</a>
-
+                      
+                          </tbody>
 <!--Ventana Modal Para Retirar Articulos-->
 <div class="modal fade" id="modal-create-retry">
   <div class="modal-dialog">
@@ -205,7 +213,7 @@ Limpieza
                   <span aria-hidden="true">&times;</span></button>
               </div>
           <div class="modal-body">
-            <form action = ""method="POST">
+            <form action = "{{route('savelimp')}}"method="POST">
               @csrf
               <div class="form-group">
                 <label for="text">Código</label>
@@ -244,7 +252,7 @@ Limpieza
 
               <div class="form-group">
                 <label for="text">Cantidad En Existencia</label>
-                <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" required>
+                <input type="number" class="form-control" name="cantidadExistencia" placeholder="Cantidad" required>
               </div>
               <div class="form-group">
                 <label for="text">Precio Unitario</label>

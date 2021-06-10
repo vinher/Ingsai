@@ -1,15 +1,19 @@
 @extends('adminlte::page')
-@section('title','Desinfección')
+@section('title','Control de Voladores')
 @section('content_header')
 <h1>
 Control Voladores
-<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-create-category" >
+<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-save-category" >
   Agregar Articulos
 </button>  
 </h1>
 @stop
 @section('content')
-
+@if(session('mensaje'))
+  <div class="alert alert-success">
+    {{session('mensaje')}}
+  </div>
+@endif
 <div class="container-fluid">
   <div class="row">
       <div class="col-12">
@@ -197,8 +201,8 @@ Control Voladores
 
 <!-- /.modal -->
 
-                           <!--Ventana Modal Para Guardar Articulos-->
-<div class="modal fade" id="modal-create-category">
+ <!--Ventana Modal Para Guardar Articulos-->
+<div class="modal fade" id="modal-save-category">
   <div class="modal-dialog">
       <div class="modal-content bg-default">
           <div class="modal-header">
@@ -207,25 +211,15 @@ Control Voladores
                   <span aria-hidden="true">&times;</span></button>
               </div>
           <div class="modal-body">
-            <form action = ""method="POST">
+            <form action = "{{route ('saveCdV')}}" method="POST">
               @csrf
               <div class="form-group">
                 <label for="text">Código</label>
                 <input type="text" class="form-control" name="codigo" placeholder="Introduce el Código del Producto" required>
               </div>
               <div class="form-group">
-                <label for="text">Área</label>
-                <select class="form-control" name="area" value="">
-                  <option selected value="" required>Opciones</option>
-                  <option value="Estacion de Roedores">Estacion de Roedores</option>
-                  <option value="Trampas Capturas de Roedores">Trampas Capturas de Roedores</option>
-                  <option value="Llave para Estación">Llave para Estación</option>
-                  <option value="Aritamento Para Veneno">Aritamento Para Veneno</option>
-                  <option value="Trampas Monitoreo de Insectos">Trampas Monitoreo de Insectos</option>
-                  <option value="Trampas Para Especies Menores">Trampas Para Especies Menores</option>
-                  <option value="Estacion Control de Plagas">Estacion Control de Plagas</option>
-
-                </select>
+                <label for="text">Producto</label>
+                <input type="text" class="form-control" name="area" placeholder="Nombre del Producto" required>
               </div>
               <div class="form-group">
                 <label for="text">Producto</label>
@@ -243,10 +237,9 @@ Control Voladores
 
                 </select>
               </div>
-
               <div class="form-group">
-                <label for="text">Cantidad En Existencia</label>
-                <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" required>
+                <label for="text">Cantidad</label>
+                <input type="number" class="form-control" name="cantidadExistencia" placeholder="Cantidad" required>
               </div>
               <div class="form-group">
                 <label for="text">Precio Unitario</label>
@@ -273,8 +266,7 @@ Control Voladores
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
-</div>
-
+</div>        
 
 
 

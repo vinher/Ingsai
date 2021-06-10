@@ -43,4 +43,20 @@ class DecController extends Controller
         return view('desinfeccion',compact('save'));
       
       }
+
+      public function editDesc(Request $request, $id){
+        $var = App\Models\Dec::findOrFail($id);
+        $var->codigo=$request->codigo;
+        $var->producto=$request->producto;
+        $var->formato=$request->formato;
+        $var->fecha=$request->fecha;
+        $var->cantidadExistencia=$request->cantidadExistencia;
+        $var->precioUnitario=$request->precioUnitario;
+        $var->valorInventario=$request->valorInventario;
+        $var->folio=$request->folio;
+        $var->save();
+  
+        return back()->with('mensaje','Datos Editados');
+                 
+      }
 }

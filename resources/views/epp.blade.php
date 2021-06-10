@@ -9,7 +9,11 @@ Equipo De  Protección Personal
 </h1>
 @stop
 @section('content')
-
+@if(session('mensaje'))
+<div class="alert alert-success">
+  {{session('mensaje')}}
+</div>
+@endif
 <div class="container-fluid">
   <div class="row">
       <div class="col-12">
@@ -206,7 +210,7 @@ Equipo De  Protección Personal
                   <span aria-hidden="true">&times;</span></button>
               </div>
           <div class="modal-body">
-            <form action = ""method="POST">
+            <form action = "{{route('saveEpp')}}"method="POST">
               @csrf
               <div class="form-group">
                 <label for="text">Código</label>
@@ -245,7 +249,7 @@ Equipo De  Protección Personal
 
               <div class="form-group">
                 <label for="text">Cantidad En Existencia</label>
-                <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" required>
+                <input type="number" class="form-control" name="cantidadExistencia" placeholder="Cantidad" required>
               </div>
               <div class="form-group">
                 <label for="text">Precio Unitario</label>
