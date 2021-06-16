@@ -19,6 +19,7 @@ class CreateCipsTable extends Migration
             $table->string('area');
             $table->string('producto');
             $table->string('formato');
+            $table->string('categoria');
             $table->string('cantidad');
             $table->double('precioUnitario');
             $table->double('valorInventario');

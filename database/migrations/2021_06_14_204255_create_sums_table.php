@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDecsTable extends Migration
+class CreateSumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateDecsTable extends Migration
      */
     public function up()
     {
-        Schema::create('decs', function (Blueprint $table) {
+        Schema::create('sums', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo');
-            $table->string('producto');
-            $table->string('formato');
+            $table->string('nombre');
             $table->string('fecha');
-            $table->string('cantidadExistencia');
-            $table->double('precioUnitario');
-            $table->double('valorInventario');
-            $table->string('folio');
+            $table->string('cantidad');
+            $table->string('articulo');
+            $table->string('motivo');
+            $table->string('entrego');
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ class CreateDecsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('decs');
+        Schema::dropIfExists('sums');
     }
 }

@@ -250,16 +250,16 @@ return [
         [
             'text' => 'Cotización',
             'url'  => 'cotizacion',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-fw fa-plus',
         ],
         [
             'text' => 'Requisición',
             'url'  => 'requisicion',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-fw fa-users',
         ],
         [
             'text'    => 'Almacén',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fas fa-fw fa-database',
             'submenu' => [
                 [
                     'text' => 'Control Integral de Plagas',
@@ -289,31 +289,8 @@ return [
                         ],
                     ],
                 ],*/
-                [
-                    'text' => 'Desinfección',
-                    'url'  => 'desinfeccion',
-                ],
-                [
-                    'text' => 'Purificadores',
-                    'url'  => 'purificadores',
-                ],
-                [
-                    'text' => 'Control de Voladores',
-                    'url'  => 'controlvoladores',
-                ],
-                [
-                    'text' => 'Herramental',
-                    'url'  => 'herramental',
-                ],
-                [
-                    'text' => 'EPP',
-                    'url'  => 'epp',
-                ],
-                [
-                    'text' => 'Limpieza',
-                    'url'  => 'limpieza',
-                ],
-
+ 
+ 
             ],
         ],
         /*['header' => 'labels'],

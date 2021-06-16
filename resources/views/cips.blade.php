@@ -2,7 +2,6 @@
 
 @section('title', 'Control Integral de Plagas')
 
-
 @section('content_header')
 
 <h1>
@@ -12,22 +11,38 @@
     </button>
 </h1>
 
-
 @stop
 @section('content')
 
+<!--Mensajes de Datos Guardados, Editados y Eliminados-->
     @if(session('mensaje'))
       <div class="alert alert-success">
         {{session('mensaje')}}
       </div>
     @endif
 
-    @error('codigo')
+    @if(session('msg'))
+      <div class="alert alert-warning">
+        {{session('msg')}}
+      </div>
+    @endif
+
+    @if(session('msj'))
+    <div class="alert alert-danger">
+      {{session('msj')}}
+    </div>
+    @endif
+
+<!--Mensajes de Posibles -errores-->
+
+@error('codigo')
     <div class="alert alert-danger">
       <p>Verifique el Código</p>
     </div>
-    @enderror
+@enderror
 
+
+<!--Inicio de la Pagina Principal-->
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -46,6 +61,7 @@
                             <th>Área</th>
                             <th>Producto</th>
                             <th>Formato</th>
+                            <th>Categoria</th>
                             <th>Cantidad En Existencia</th>
                             <th>Precio Unitario</th>
                             <th>Valor De Inventario</th>
@@ -62,13 +78,14 @@
                             <td>{{$item->area }}</td>
                             <td>{{$item->producto }}</td>
                             <td>{{$item->formato }}</td>
+                            <td>{{$item->categoria}}</td>
                             <td>{{$item->cantidad }}</td>
                             <td>{{$item->precioUnitario }}</td>
                             <td>{{$item->valorInventario }}</td>
                             <td>{{$item->folio }}</td>
                             <td>
                             <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-category{{$item->id}}">E</a>
-                            <!--PENDIENTE URGENTE VENTENA EDITAR-->
+
                             <!--Ventana Modal Para Editar Articulos-->
                             <div class="modal fade" id="modal-edit-category{{$item->id}}">
                                 <div class="modal-dialog">
@@ -89,7 +106,7 @@
                                         <div class="form-group">
                                           <label for="text">Área</label>
                                           <select class="form-control" name="area" value="{{$item->area}}">
-                                            <option selected value="{{$item->area}}" required>Opciones</option>
+                                            <option selected value="{{$item->area}}" required>{{$item->area}}</option>
                                             <option value="Estacion de Roedores">Estacion de Roedores</option>
                                             <option value="Trampas Capturas de Roedores">Trampas Capturas de Roedores</option>
                                             <option value="Llave para Estación">Llave para Estación</option>
@@ -116,14 +133,26 @@
 
                                               </select>
                                             </div>
-
+                                            <div class="form-group">
+                                              <label for="text">Categoria</label>
+                                              <select class="form-control" name="categoria" value="{{$item->categoria}}">
+                                                <option selected value="{{$item->categoria}}" required>{{$item->categoria}}</option>
+                                                <option value="Piezas">Control Integral de Plagas</option>
+                                                <option value="Litros">Herramental</option>
+                                                <option value="Equipo">Limpieza</option>
+                                                <option value="Gramos">CPP</option>
+                                                <option value="Kilogramos">Opcion 1</option>
+                                                <option value="Kilogramos">Opcion 2</option>
+                                              </select>
+                                            </div>
+    
                                             <div class="form-group">
                                               <label for="text">Cantidad En Existencia</label>
                                               <input type="number" class="form-control" name="cantidad" placeholder="Cantidad" value="{{$item->cantidad}}" required>
                                             </div>
                                             <div class="form-group">
                                               <label for="text">Precio Unitario</label>
-                                              <input type="number" class="form-control" name="precioUnitario" placeholder="Precio Unitario" required value="{{$item->precioUnitario}}">
+                                              <input type="double" class="form-control" name="precioUnitario" placeholder="Precio Unitario" step="any" required value="{{$item->precioUnitario}}">
                                             </div>
 
 
@@ -152,90 +181,19 @@
                             </div>
 
                             <!-- /.modal -->
-    
-                             
-                            
+                        <!--Botón Para Eliminar-->
                              <form action="{{route('borrar', $item)}}" method="POST" class="d-inline">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-danger btn-sm" type ="submit">D</button>
-                             </form>   
-
-                             <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-create-retry{{$item->id}}">R</a>
-
-<!--Ventana Modal Para Retirar Articulos-->
-<div class="modal fade" id="modal-create-retry{{$item->id}}">
-  <div class="modal-dialog">
-      <div class="modal-content bg-default">
-          <div class="modal-header">
-              <h4 class="modal-title">Retirar Articulos</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-              </div>
-          <div class="modal-body">
-            <form action = "{{route ('saveHistory',$item->id)}}"method="POST">
-              @csrf
-              <div class="form-group">
-                <label for="text">Nombre del Responsable</label>
-                <input type="text" class="form-control" name="nombreresponsable" placeholder="Introduce El Nombre Del Responsable" required>
-              </div>
-              <div class="form-group">
-                <label for="text">Quien Entrega</label>
-                <input type="text" class="form-control" name="quienentrega" placeholder="Nombre del Encargado" required>
-              </div>
-
-
-              <div class="form-group">
-                <label for="text">Motivo</label>
-                <input type="text" class="form-control" name="motivo" placeholder="Describa el motivo" required>
-              </div>
-
-
-              <div class="form-group">
-                <label for="text">Articulo</label>
-                <input type="text" class="form-control" name="articulo" placeholder="Articulo" required value="{{$item->producto}}">
-              </div>
-              <div class="form-group">
-                <label for="text">Cantidad</label>
-                <input type="number" class="form-control" name="cantidad" placeholder="Cantidad Del Material" required>
-              </div>
-
-
-
-          </div>
-          <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-outline-primary">Guardar</button>
-          </div>
-          </form>
-      </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-<!-- /.modal -->
-    
-                    
-                            
+                             </form>                       
                             </td>
                         </tr>
                         @endforeach()
                     </tbody>
 
-                    <tfoot>
-                        <tr>
-                          <th>Código</th>
-                          <th>Área</th>
-                          <th>Producto</th>
-                          <th>Formato</th>
-                          <th>Cantidad En Existencia</th>
-                          <th>Precio Unitario</th>
-                          <th>Valor De Inventario</th>
-                          <th>Folio de Factura</th>
-                          <th>Acciones</th>
-                        </tr>
-                    </tfoot>
+
+
                 </table>
             </div>
             <!-- /.card-body -->
@@ -295,6 +253,18 @@
 
                   </select>
                 </div>
+                <div class="form-group">
+                  <label for="text">Categoria</label>
+                  <select class="form-control" name="categoria" value="">
+                    <option selected value="" required>Opciones</option>
+                    <option value="Piezas">CIP</option>
+                    <option value="Litros">Herramental</option>
+                    <option value="Equipo">Equipo</option>
+                    <option value="Gramos">Gramos</option>
+                    <option value="Kilogramos">Kilogramos</option>
+
+                  </select>
+                </div>
 
                 <div class="form-group">
                   <label for="text">Cantidad En Existencia</label>
@@ -328,14 +298,6 @@
 </div>
 
 <!-- /.modal -->
-
-
-
-
-
-
-
-
 @stop
 
 @section('js')
